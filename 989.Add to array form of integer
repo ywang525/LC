@@ -1,0 +1,21 @@
+class Solution:
+    def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+        add = 0
+        res = [0]*len(num)
+        for i in range(len(num)-1, -1, -1):
+            if num[i] + k%10 + add < 10:
+                res[i] = num[i] + k%10 + add
+                add = 0  
+            else:
+                res[i] = num[i] + k%10 + add - 10
+                add = 1
+            k = k // 10
+        if add == 0 and k == 0:
+            return res
+        else:
+            n = add + k
+            while (n % 10 != 0) or (n // 10 != 0):
+                res = [n%10] + res
+                n = n//10
+            return res
+            
